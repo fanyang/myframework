@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans>
+	<bean id="myJdbcTemplate" class="myframework.myjdbc.MyJdbcTemplate">
+	    <property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<bean id="dataSource" 
+        class="myframework.datasource.MyDataSource" init-method="init">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost:3306/itat_shop?useUnicode=true&amp;characterEncoding=utf8"/>
+	    <property name="username" value="itat"/>
+	    <property name="password" value="itat123"/>
+	    <property name="maxActive" value="100"/>
+	</bean>
+	
+</beans>
