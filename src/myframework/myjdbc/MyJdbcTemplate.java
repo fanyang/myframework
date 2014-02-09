@@ -5,6 +5,12 @@ import javax.sql.DataSource;
 
 import myframework.datasource.MyDataSource;
 
+
+/**
+ * Provide ThreadLocal based JDBC session.
+ * @author Fan
+ *
+ */
 public class MyJdbcTemplate {
 
 	private DataSource dataSource;

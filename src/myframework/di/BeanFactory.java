@@ -9,6 +9,11 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.apache.commons.beanutils.BeanUtils;
 import org.w3c.dom.*;
 
+/**
+ * XML based bean factory
+ * @author think
+ *
+ */
 public class BeanFactory {
 
 	private Map<String, Object> beans = new HashMap<String, Object>();
@@ -31,16 +36,15 @@ public class BeanFactory {
 				processBeanNode((Element)beanNodes.item(i));
 			}
 
-
 		} catch (Exception e) {
-
 			e.printStackTrace();
-
 		}
 
 	}
 	
-	
+	/*
+	 * Process bean node recursively
+	 */
 	private void processBeanNode(Element beanElement) throws Exception {
 		String id = beanElement.getAttribute("id");
 		if (beans.containsKey(id)) return;

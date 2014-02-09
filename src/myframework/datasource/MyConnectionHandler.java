@@ -6,6 +6,11 @@ import java.lang.reflect.Proxy;
 import java.sql.Connection;
 
 
+/**
+ * A proxy to real connection
+ * @author Fan
+ *
+ */
 class MyConnectionHandler implements InvocationHandler {
 	
 	private Connection realConnection;
@@ -24,6 +29,7 @@ class MyConnectionHandler implements InvocationHandler {
 				,this);
 	}
 
+	@Override
 	public Object invoke(Object proxy, Method method, Object[] args)
 			throws Throwable {
 		if ("close".equals(method.getName())) {

@@ -11,12 +11,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
+/**
+ * Encapsulate JDBC operations.
+ * @author Fan
+ *
+ */
 public class SqlSession {
 
 	private Connection connection = null;
 	private PreparedStatement ps = null;
 	private ResultSet rs = null;
 
+	/*
+	 * Only MyJdbcTemplate can create SqlSession
+	 */
 	SqlSession(Connection connection) {
 		this.connection = connection;
 	}

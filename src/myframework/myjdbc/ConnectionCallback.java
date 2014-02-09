@@ -2,7 +2,15 @@ package myframework.myjdbc;
 
 import java.sql.Connection;
 
+/**
+ * Provide connection to user
+ * @author Fan
+ *
+ * @param <T>
+ */
 public interface ConnectionCallback<T> {
-	 T doInConnection(Connection con);
+	
+	 public T doInConnection(Connection con);
+	 
 }
 

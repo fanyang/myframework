@@ -7,6 +7,12 @@ import java.sql.SQLException;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+/**
+ * Bean property row mapper
+ * @author Fan
+ *
+ * @param <T> bean class
+ */
 public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 
 	private Class<T> mappedClass;
@@ -26,11 +32,10 @@ public class BeanPropertyRowMapper<T> implements RowMapper<T> {
 				String columnName = metaData.getColumnName(i);
 				BeanUtils.copyProperty(bean, columnName, rs.getObject(columnName));
 			}
-		} catch (InstantiationException | IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (InstantiationException 
+				| IllegalAccessException 
+				| SQLException 
+				| InvocationTargetException e) {
 			e.printStackTrace();
 		}
 		return bean;
