@@ -3,6 +3,7 @@ package myframework.datasource;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.SQLFeatureNotSupportedException;
 import java.util.concurrent.ArrayBlockingQueue;
@@ -93,6 +94,12 @@ public class MyDataSource implements DataSource{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		try (PreparedStatement ps = connection.prepareStatement("SELECT 1"); // Test database connection.
+				) {
+		} catch (SQLException e) {
+			connection = new MyConnectionHandler(this)
+			.bind(DriverManager.getConnection(url, username, password));
+		}
 		
 		return connection;
 	}
@@ -102,7 +109,7 @@ public class MyDataSource implements DataSource{
 	 * @param connection
 	 */
 	void free(Connection connection) {
-		if (connectionPool.size() == maxActive) return;
+		if (connectionPool.contains(connection)) return; // To avoid close connection more than once
 		try {
 			connectionPool.put(connection);
 		} catch (InterruptedException e) {

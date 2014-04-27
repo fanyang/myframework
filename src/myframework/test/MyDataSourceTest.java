@@ -27,6 +27,7 @@ public class MyDataSourceTest {
 	public static final String password = "itat123";
 	
 	private static MyDataSource dataSource;
+	private static BeanFactory context = new BeanFactory("beans.xml"); // All test cases use same BeanFactory.
 	
 	static {
 		dataSource = new MyDataSource();
@@ -60,7 +61,7 @@ public class MyDataSourceTest {
 	@Test
 	public void testGetConnection() {
 			try {
-				for (int i = 0; i < 10; i++) {
+				for (int i = 0; i < 20; i++) {
 					Connection connection = dataSource.getConnection();
 					System.out.println(connection);
 					connection.close();
@@ -73,7 +74,6 @@ public class MyDataSourceTest {
 	
 	@Test
 	public void testUpdate() {
-		BeanFactory context = new BeanFactory("beans.xml");
 		MyJdbcTemplate myJdbcTemplate = context.getBean("myJdbcTemplate", MyJdbcTemplate.class);
 		SqlSession session;
 		try {
@@ -89,7 +89,6 @@ public class MyDataSourceTest {
 	
 	@Test
 	public void testTx() {
-		BeanFactory context = new BeanFactory("beans.xml");
 		MyJdbcTemplate myJdbcTemplate = context.getBean("myJdbcTemplate", MyJdbcTemplate.class);
 		SqlSession session;
 		try {
@@ -110,7 +109,6 @@ public class MyDataSourceTest {
 	
 	@Test
 	public void testQueryDi() {
-		BeanFactory context = new BeanFactory("beans.xml");
 		MyJdbcTemplate myJdbcTemplate = context.getBean("myJdbcTemplate", MyJdbcTemplate.class);
 		SqlSession session;
 		try {
