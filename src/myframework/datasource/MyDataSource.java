@@ -26,6 +26,7 @@ public class MyDataSource implements DataSource{
 	private int maxActive;
 	
 	private BlockingQueue<Connection> connectionPool;
+	private static final int CONNECTION_TIMEOUT = 1;
 
 	public String getDriverClassName() {
 		return driverClassName;
@@ -94,9 +95,7 @@ public class MyDataSource implements DataSource{
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
-		try (PreparedStatement ps = connection.prepareStatement("SELECT 1"); // Test database connection.
-				) {
-		} catch (SQLException e) {
+		if (!connection.isValid(CONNECTION_TIMEOUT)) {
 			connection = new MyConnectionHandler(this)
 			.bind(DriverManager.getConnection(url, username, password));
 		}
